@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/stock")
 public class StockController {
@@ -30,19 +29,26 @@ public class StockController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO> update(@RequestBody @Valid StockDTO dto){
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(service.update(dto));
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StockDTO>> findAll(){
-        List<StockDTO> list = new ArrayList<>();
-        StockDTO dto = new StockDTO();
-        dto.setId(1L);
-        dto.setName("Magazine Luiza");
-        dto.setPrice(100.0);
-        dto.setVariation(1.00);
-        dto.setDate(LocalDate.now());
-        list.add(dto);
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StockDTO> findById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<StockDTO> delete(@PathVariable Long id){
+        return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping(value = "/today", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StockDTO>> findByToday(){
+        return ResponseEntity.ok(service.findByToday());
     }
 }
