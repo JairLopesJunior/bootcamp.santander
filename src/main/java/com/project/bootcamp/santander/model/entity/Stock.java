@@ -1,5 +1,6 @@
 package com.project.bootcamp.santander.model.entity;
 
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ public class Stock {
     private Double variation;
 
     @Column(name = "date")
-    private LocalDate data;
+    private LocalDate date;
 
     public Long getId() {
         return id;
@@ -56,10 +57,11 @@ public class Stock {
         this.variation = variation;
     }
 
-    public LocalDate getData() {
-        return data;
+    public LocalDate getDate() {
+        return date;
     }
-    public void setData(LocalDate data) {
-        this.data = data;
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

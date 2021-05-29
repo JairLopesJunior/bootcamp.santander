@@ -18,18 +18,10 @@ import java.util.Optional;
 @Service
 public class StockService {
 
+    @Autowired
     private StockRepository repository;
+    @Autowired
     private StockMapper mapper;
-
-    @Autowired
-    public StockService(StockRepository repository) {
-        this.repository = repository;
-    }
-
-    @Autowired
-    public StockService(StockMapper mapper) {
-        this.mapper = mapper;
-    }
 
     @Transactional
     public StockDTO save(StockDTO dto) {
